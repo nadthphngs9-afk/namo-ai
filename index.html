@@ -1,0 +1,71 @@
+
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NAMO AI</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#080b16;color:white;font-family:Arial,sans-serif}
+header{padding:18px;background:#111a2d;font-size:23px;font-weight:bold}
+main{max-width:700px;margin:auto;padding:18px}
+h1{text-align:center;color:#91baff}
+.tools{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:20px 0}
+button{padding:13px;border:1px solid #35476a;border-radius:12px;background:#192641;color:white}
+.active{background:#315bb0}
+#chat{height:380px;overflow:auto;background:#111a2d;border-radius:15px;padding:12px}
+.msg{padding:12px;margin:9px 0;border-radius:12px;white-space:pre-wrap}
+.bot{background:#26344e}
+.user{background:#315bb0;text-align:right}
+form{display:flex;gap:7px;margin-top:12px}
+input{min-width:0;flex:1;padding:13px;border-radius:10px;background:#17233b;color:white;border:1px solid #35476a}
+.send{background:#526de0}
+</style>
+</head>
+<body>
+<header>🟣 NAMO AI</header>
+<main>
+<h1>ผู้ช่วย AI ส่วนตัว</h1>
+<p style="text-align:center">ALL IN ONE AI ASSISTANT</p>
+<div class="tools">
+<button onclick="mode='แชต AI'">💬 แชต AI</button>
+<button onclick="mode='เขียนโค้ด'">💻 เขียนโค้ด</button>
+<button onclick="mode='สร้างเกม'">🎮 สร้างเกม</button>
+<button onclick="mode='ช่วยเรียน'">📚 ช่วยเรียน</button>
+<button onclick="mode='ค้นคว้า'">🌐 ค้นคว้า</button>
+<button onclick="mode='ไอเดียภาพ'">🎨 ไอเดียภาพ</button>
+</div>
+<div id="chat">
+<div class="msg bot">สวัสดี! ฉันคือ NAMO AI ✨</div>
+</div>
+<form id="form">
+<input id="message" placeholder="พิมพ์คำสั่งของคุณ..." autocomplete="off">
+<button class="send">ส่ง</button>
+</form>
+<p style="color:#9eacc5;font-size:12px;text-align:center">NAMO AI รุ่นทดลอง ยังไม่ได้เชื่อมต่อโมเดล AI จริง</p>
+</main>
+<script>
+let mode='แชต AI';
+const chat=document.getElementById('chat');
+document.getElementById('form').onsubmit=function(e){
+e.preventDefault();
+let input=document.getElementById('message');
+let q=input.value.trim();
+if(!q)return;
+chat.innerHTML+='<div class="msg user"></div>';
+chat.lastElementChild.textContent=q;
+let answer='รับคำสั่งแล้ว: '+q+'\nNAMO AI อยู่ในโหมดทดลอง ยังไม่ได้เชื่อมต่อ AI จริง';
+if(mode==='เขียนโค้ด')answer='โหมดเขียนโค้ดเปิดแล้ว 💻 บอกสิ่งที่ต้องการสร้างได้เลย';
+if(mode==='สร้างเกม')answer='โหมดสร้างเกมเปิดแล้ว 🎮';
+if(mode==='ช่วยเรียน')answer='โหมดช่วยเรียนเปิดแล้ว 📚';
+if(mode==='ค้นคว้า')answer='โหมดค้นคว้าเปิดแล้ว 🌐 ยังไม่ได้เชื่อมต่อระบบค้นเว็บ';
+if(mode==='ไอเดียภาพ')answer='โหมดไอเดียภาพเปิดแล้ว 🎨';
+chat.innerHTML+='<div class="msg bot"></div>';
+chat.lastElementChild.textContent=answer;
+input.value='';
+chat.scrollTop=chat.scrollHeight;
+};
+</script>
+</body>
+</html>
